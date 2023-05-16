@@ -1,6 +1,8 @@
 <?php
 
+use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogPostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,9 @@ Route::middleware([
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+});
+//Public blog routes 
+Route::group(['prefix' => 'blog'], function () {
+   Route::get('/',[BlogPostsController::class,'index'])->name('blog.index');
+   Route::get('/{slug}',[BlogPostsController::class,'show'])->name('blog.show');
 });
